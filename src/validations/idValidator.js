@@ -7,4 +7,6 @@ const idValidator = [
     check('rol').custom((role)=> validRole(role) )
 ]
 
-module.exports = idValidator
+module.exports = {
+    idValidator
+}

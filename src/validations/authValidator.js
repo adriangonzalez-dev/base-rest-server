@@ -5,4 +5,6 @@ const authValidator = [
     check('pass','La contraseña es obligatoria').notEmpty(),
 ]
 
-module.exports = authValidator
+module.exports = {
+    authValidator
+}

@@ -6,4 +6,6 @@ const deleteValidator = [
     check('id').custom((id)=> idExists(id)),
 ]
 
-module.exports = deleteValidator
+module.exports = {
+    deleteValidator
+}

@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+//controllers
 const {login} = require('../controllers/authController');
 
-const authValidator = require('../validations/authValidator');
-const {catchErrors} = require('../middlewares/catchErrors')
+//validations
+const {authValidator} = require('../validations')
+
+//middlewares
+const {catchErrors} = require('../middlewares');
 
 router.post('/',authValidator, catchErrors,login)
 

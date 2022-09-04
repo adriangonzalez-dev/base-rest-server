@@ -10,4 +10,6 @@ const usersValidator = [
     check('email').custom((email)=> emailExists(email) )
 ]
 
-module.exports = usersValidator
+module.exports = {
+    usersValidator
+}

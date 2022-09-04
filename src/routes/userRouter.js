@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+//Controllers
 const {usersGet,usersDelete,usersPatch,usersPost,usersPut} = require('../controllers/usersControllers');
-const usersValidator = require('../validations/usersValidators');
-const idValidator = require('../validations/idValidator');
-const deleteValidator = require('../validations/deleteValidator');
 
-const {catchErrors} = require('../middlewares/catchErrors');
-const {validateJwt} = require('../middlewares/validateJWT');
-const {adminRole,validateRole} = require('../middlewares/adminRole')
+//Validations
+const {deleteValidator,idValidator,usersValidator} = require('../validations')
 
-router.get('/',usersGet)
+//Middlewares
+const {catchErrors, adminRole, validateRole, validateJwt} = require('../middlewares');
+
+//Routes
+router.get('/',usersGet);
 
 router.post('/',usersValidator, catchErrors,usersPost)
 
