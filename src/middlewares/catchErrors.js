@@ -10,4 +10,6 @@ const catchErrors = (req,res,next) =>{
     next();
 }
 
-module.exports = catchErrors
+module.exports = {
+    catchErrors
+}

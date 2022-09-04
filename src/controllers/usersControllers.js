@@ -5,9 +5,8 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
     usersGet: async (req,res = response)=>{
-        
+
         const {limit = 5, offset = 0} = req.query
-        
 
         const [total, users] = await Promise.all([
             User.countDocuments({state: true}),
