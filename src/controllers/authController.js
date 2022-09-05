@@ -46,15 +46,12 @@ module.exports = {
         const {id_token} = req.body;
 
         try {
-            
             const {name, img, email} = await googleVerify(id_token)
 
-            
             //Verificar si el usuario existe
             let user = await User.findOne({email})
             //si no existe
             if(!user){
-                
                 user = new User({
                     name,
                     email,
@@ -64,15 +61,12 @@ module.exports = {
                 })
                 await user.save()
             }
-            
             //Si el usuario esta desactivado
-            
             if(!user.state){
                 return res.status(401).json({
                     msg: 'El usuario esta desactivado, comuniquse con soporte'
                 })
             }
-            
             //si da todo ok, se genera el jwt
             const token = await JwtGenerator(user.id)
 
