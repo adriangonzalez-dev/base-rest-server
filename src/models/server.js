@@ -41,7 +41,7 @@ class Server {
 
     middlewares() {
         //Directorio público
-        this.app.use(express.static(path.join(__dirname,'public')))
+        this.app.use(express.static(path.join(__dirname,'../../public')))
 
         //Lectura y parseo del body
         this.app.use(express.json())

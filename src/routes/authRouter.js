@@ -2,14 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 //controllers
-const {login} = require('../controllers/authController');
+const {login, googleSignIn} = require('../controllers/authController');
 
 //validations
-const {authValidator} = require('../validations')
+const {authValidator, googleValidator} = require('../validations')
 
 //middlewares
 const {catchErrors} = require('../middlewares');
 
-router.post('/',authValidator, catchErrors,login)
+router.post('/login',authValidator, catchErrors,login)
+
+router.post('/google',googleValidator, catchErrors,googleSignIn)
+
 
 module.exports = router
