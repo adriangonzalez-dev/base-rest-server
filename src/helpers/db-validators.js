@@ -1,4 +1,5 @@
-const {Role, User, Categoria} = require('../models')
+const { request } = require('express')
+const {Role, User, Categoria, Product} = require('../models')
 
 const validRole = async (role = '')=>{
     const rolExists = await Role.findOne({role})
@@ -36,10 +37,32 @@ const idCategoryExist = async (id)=>{
     }
 }
 
+const validCategory = async (category = '')=>{
+
+    const name = category.toUpperCase();
+
+    const categoryExist = await Categoria.findOne({name})
+    if(!categoryExist){
+        throw new Error(`La categoría ${category} no se encuentra en la Base de datos`)
+    } else {
+        request.category = categoryExist
+    }
+
+}
+
+const idProductExist = async (id)=>{
+    const idExist = await Product.findById(id)
+    if(!idExist){
+        throw new Error(`El producto con id ${id} no existe`)
+    }
+}
+
 module.exports = {
     validRole,
     emailExists,
     idExists,
     categoryExists,
-    idCategoryExist
+    idCategoryExist,
+    validCategory,
+    idProductExist
 }

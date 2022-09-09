@@ -6,6 +6,7 @@ const googleValidator = require('./googleValidator');
 const categoryValidator = require('./categoryValidator');
 const idCategoryValidator = require('./idCategoryValidator');
 const productValidator = require('./productValidator');
+const idProductValidator = require('./idProductValidator')
 
 
 module.exports = {
@@ -16,5 +17,6 @@ module.exports = {
     ...googleValidator,
     ...categoryValidator,
     ...idCategoryValidator,
-    ...productValidator
+    ...productValidator,
+    ...idProductValidator
 }
