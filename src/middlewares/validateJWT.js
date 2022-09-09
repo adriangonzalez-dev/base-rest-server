@@ -41,12 +41,11 @@ const validateJwt = async (req = request, res= response, next) => {
 
     } catch (error) {
 
-        res.status(401).json({
+        return res.status(401).json({
             msg: 'Token no válido'
         })
     }
 
-    next()
 }
 
 module.exports = {

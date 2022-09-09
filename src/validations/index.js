@@ -3,11 +3,18 @@ const idValidator = require('./idValidator');
 const deleteValidator = require('./deleteValidator');
 const authValidator = require('./authValidator');
 const googleValidator = require('./googleValidator');
+const categoryValidator = require('./categoryValidator');
+const idCategoryValidator = require('./idCategoryValidator');
+const productValidator = require('./productValidator');
+
 
 module.exports = {
     ...usersValidator,
     ...idValidator,
     ...deleteValidator,
     ...authValidator,
-    ...googleValidator
+    ...googleValidator,
+    ...categoryValidator,
+    ...idCategoryValidator,
+    ...productValidator
 }

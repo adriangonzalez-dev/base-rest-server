@@ -1,9 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const userRouter = require('../routes/userRouter');
-const authRouter = require('../routes/authRouter');
-const categoriesRouter = require('../routes/categoriesRouter');
+const {authRouter,userRouter,productsRouter,categoriesRouter } = require('../routes');
 const { dbConnection } = require('../database/config');
 
 class Server {
@@ -16,6 +14,7 @@ class Server {
             auth: '/api/auth',
             users: '/api/users',
             categories: '/api/categories',
+            products: '/api/products'
         }
 
         //Database Connection
@@ -35,7 +34,8 @@ class Server {
     routes() {
         this.app.use( this.paths.auth, authRouter );
         this.app.use( this.paths.users, userRouter );
-        this.app.use( this.paths.categories, categoriesRouter);
+        this.app.use( this.paths.categories, categoriesRouter );
+        this.app.use( this.paths.products, productsRouter)
     }
 
     listen() {

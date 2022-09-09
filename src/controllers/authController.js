@@ -1,5 +1,5 @@
 const { request,response} = require('express');
-const User = require('../models/user');
+const { User } = require('../models');
 const bcrypt = require('bcryptjs');
 const {JwtGenerator} = require('../helpers/JWT-Generator'); 
 const { googleVerify } = require('../helpers/googleVerify');
@@ -50,6 +50,7 @@ module.exports = {
 
             //Verificar si el usuario existe
             let user = await User.findOne({email})
+
             //si no existe
             if(!user){
                 user = new User({
@@ -61,10 +62,11 @@ module.exports = {
                 })
                 await user.save()
             }
+
             //Si el usuario esta desactivado
             if(!user.state){
                 return res.status(401).json({
-                    msg: 'El usuario esta desactivado, comuniquse con soporte'
+                    msg: 'El usuario esta desactivado, comuniquese con soporte'
                 })
             }
             //si da todo ok, se genera el jwt
@@ -77,7 +79,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error)
-            res.status(400).json({
+            return res.status(400).json({
                 ok:false,
                 msg: 'El token no se pudo verificar'
             })
