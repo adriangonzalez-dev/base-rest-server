@@ -57,6 +57,14 @@ const idProductExist = async (id)=>{
     }
 }
 
+const ValidCollection = (collection='', collections=[])=>{
+    if(!collections.includes(collection)){
+        throw new Error(`${collection} no es una colección válida`)
+    }
+
+    return true;
+}
+
 module.exports = {
     validRole,
     emailExists,
@@ -64,5 +72,6 @@ module.exports = {
     categoryExists,
     idCategoryExist,
     validCategory,
-    idProductExist
+    idProductExist,
+    ValidCollection
 }

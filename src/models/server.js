@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const {authRouter,userRouter,productsRouter,categoriesRouter } = require('../routes');
+const {authRouter,userRouter,productsRouter,categoriesRouter,searchRouter,uploadsRouter } = require('../routes');
 const { dbConnection } = require('../database/config');
+const fileUpload = require('express-fileupload');
 
 class Server {
     constructor() {
@@ -12,9 +13,11 @@ class Server {
         //paths
         this.paths = {
             auth: '/api/auth',
-            users: '/api/users',
             categories: '/api/categories',
-            products: '/api/products'
+            products: '/api/products',
+            search: '/api/search',
+            users: '/api/users',
+            uploads: '/api/uploads'
         }
 
         //Database Connection
@@ -33,9 +36,11 @@ class Server {
 
     routes() {
         this.app.use( this.paths.auth, authRouter );
-        this.app.use( this.paths.users, userRouter );
         this.app.use( this.paths.categories, categoriesRouter );
-        this.app.use( this.paths.products, productsRouter)
+        this.app.use( this.paths.products, productsRouter);
+        this.app.use( this.paths.search, searchRouter);
+        this.app.use( this.paths.users, userRouter );
+        this.app.use( this.paths.uploads, uploadsRouter );
     }
 
     listen() {
@@ -52,7 +57,14 @@ class Server {
         this.app.use(express.json())
 
         //CORS
-        this.app.use(cors())
+        this.app.use(cors());
+        
+        //npm install express-fileupload
+        this.app.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/',
+            createParentPath: true
+        }));
     }
 }
 
